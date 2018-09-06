@@ -27,7 +27,8 @@ passport.use(
       //app data sent to google w/ user
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: "/auth/google/callback"
+      callbackURL: "/auth/google/callback",
+      proxy: true
     },
 
     //access token, refresh token and profile are given to user by google
