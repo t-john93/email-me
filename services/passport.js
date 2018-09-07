@@ -36,13 +36,13 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       //User.findOne searches for googleID in db, returns match promise
       //returns null if not in db
-      User.findOne({ googleID: profile.id }).then(existingUser => {
+      User.findOne({ googleId: profile.id }).then(existingUser => {
         if (existingUser) {
           //user exist in db
           done(null, existingUser);
         } else {
           //new user
-          new User({ googleID: profile.id })
+          new User({ googleId: profile.id })
             .save() //saves new user profile id in db
             .then(user => (null, user));
         }
