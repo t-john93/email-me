@@ -1,6 +1,4 @@
-//Seperates development keys from production keys depending on enviornment
-
-//heroku sets NODE_ENV
+//Separates development keys from production keys depending on environment
 if (process.env.NODE_ENV === "production") {
   module.exports = require("./prod");
 } else {

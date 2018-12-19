@@ -1,11 +1,11 @@
 //File contains Oauth strategies
 
-const passport = require("passport"); //import passport
-const GoogleStrategy = require("passport-google-oauth20").Strategy; //import oauth2.0
-const mongoose = require("mongoose"); //import mongoose
-const keys = require("../config/keys"); //import keys.js
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const mongoose = require("mongoose");
+const keys = require("../config/keys");
 
-const User = mongoose.model("users"); //loads user model class (mc)
+const User = mongoose.model("users"); //loads user model class
 
 //assigns session id to user (could even be a guest user)
 passport.serializeUser((user, done) => {
@@ -33,15 +33,14 @@ passport.use(
     //tokens and profile are given to user by google
     //user gives tokens and profile to following function
     async (accessToken, refreshToken, profile, done) => {
-      //User (mc) searches for googleID in db, returns match promise
-      //returns null if not in db
+      //User model class searches for googleID in database, returns match promise
+      //returns null if not in database
       const existingUser = await User.findOne({ googleID: profile.id });
       if (existingUser) {
-        //existing user
         return done(null, existingUser);
       }
-      //new user
-      const user = await new User({ googleID: profile.id }).save(); //saves new user profile id in db
+      //else new user
+      const user = await new User({ googleID: profile.id }).save(); //saves new user profile id in database
       done(null, user);
     }
   )
