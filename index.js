@@ -1,6 +1,6 @@
 //Trevor Johnson
 //
-//Index file for loading and excecuting server
+//Index file for loading and executing server
 
 const express = require("express"); //import express
 const mongoose = require("mongoose"); //import mongoose
