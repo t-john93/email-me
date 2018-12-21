@@ -1,16 +1,15 @@
 //Trevor Johnson
-//
 //Index file for loading and executing server
 
-const express = require("express"); //import express
-const mongoose = require("mongoose"); //import mongoose
-const cookieSession = require("cookie-session"); //import cookie-session
-const passport = require("passport"); //import passport
-const keys = require("./config/keys"); //import keys.js
-require("./models/User"); //import User.js (***require before passport***)
-require("./services/passport"); //import passport.js (auth route handle)
+const express = require("express");
+const mongoose = require("mongoose"); //middlware for mongodb
+const cookieSession = require("cookie-session"); //middleware for cookie  use
+const passport = require("passport"); //middleware for Oath compatibility
+const keys = require("./config/keys");
+require("./models/User"); //***require before passport***
+require("./services/passport");
 
-//connect to remote db thru mlab
+//connect to remote database through mlab
 mongoose.connect(keys.mongoURI);
 
 const app = express(); //declare app as new express module
@@ -26,7 +25,7 @@ app.use(
 app.use(passport.initialize()); //
 app.use(passport.session());
 
-// require and call authRoutes(app);
+
 const authRoutes = require("./routes/authRoutes")(app);
 
 const PORT = process.env.PORT || 5000; //dyn port var for heroku, or 5000 local

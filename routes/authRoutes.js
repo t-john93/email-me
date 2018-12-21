@@ -1,6 +1,8 @@
 //File for auth route handlers
 
 const passport = require("passport");
+
+
 module.exports = app => {
   app.get(
     "/auth/google",
@@ -8,7 +10,11 @@ module.exports = app => {
       scope: ["profile", "email"]
     })
   );
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get(
+      "/auth/google/callback",
+      passport.authenticate("google"),
+      (req, res) => { res.redirect("/surveys"); }
+  );
 
   /* facebook route
   app.get(
@@ -23,7 +29,7 @@ module.exports = app => {
   //logout route
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.send(req.user); //should show as undefined
+    res.redirect("/");
   });
 
   //test route returns requesting user's profile data
