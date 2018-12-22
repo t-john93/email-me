@@ -39,7 +39,7 @@ const billingRounts = require("./routes/billingRoutes")(app);
 if (process.env.NODE_ENV === "production") {
 
     //checks for and serves production asset requests
-    app.use(express.static("/client/build"));
+    app.use(express.static("client/build"));
 
     //serves index.html for any get request
     //not recognized
