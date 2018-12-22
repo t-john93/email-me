@@ -5,10 +5,11 @@ const express = require("express");
 const mongoose = require("mongoose"); //middlware for mongodb
 const cookieSession = require("cookie-session"); //middleware for cookie  use
 const bodyParser = require("body-parser");
-const passport = require("passport"); //middleware for Oath compatibility
+const passport = require("passport"); //middleware for auth services
 const keys = require("./config/keys");
-require("./models/User"); //***require before passport***
-require("./services/passport");
+// vvv must require models before passport vvv
+require("./models/User"); //user database model
+require("./services/passport"); //auth services definition
 
 //connect to remote database through mlab
 mongoose.connect(keys.mongoURI);
@@ -31,20 +32,19 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+//api routes
 const authRoutes = require("./routes/authRoutes")(app);
 const billingRounts = require("./routes/billingRoutes")(app);
 
 //only runs if in production
 if (process.env.NODE_ENV === "production") {
 
-    //checks for and serves production asset requests
+    //serves client asset requests from static build
     app.use(express.static("client/build"));
 
     //serves index.html for any get request
     //not recognized
     const path = require("path");
-
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });

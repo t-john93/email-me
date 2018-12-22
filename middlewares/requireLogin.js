@@ -1,4 +1,5 @@
-
+//middleware for checking if the requesting user is logged
+//into an account
 
 module.exports = (req, res, next) => {
     if (!req.user) {

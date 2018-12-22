@@ -1,9 +1,13 @@
-//Handles database schema for user id collection
+//File contains user model class for database
 
-const mongoose = require("mongoose");
-const { Schema } = mongoose; // destructured: const Schema = mongoose.Schema;
+const mongoose = require("mongoose"); //import mongodb helper lib
+const { Schema } = mongoose; //extract schema object from helper lib
+
+//define user model schema
 const userSchema = new Schema({
   googleID: String,
   credits: { type: Number, default: 0}
 });
-mongoose.model("users", userSchema); //loads userSchema into model class
+
+//load schema into user model class
+mongoose.model("users", userSchema);
