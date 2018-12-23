@@ -7,8 +7,9 @@ const cookieSession = require("cookie-session"); //middleware for cookie  use
 const bodyParser = require("body-parser");
 const passport = require("passport"); //middleware for auth services
 const keys = require("./config/keys");
-// vvv must require models before passport vvv
+// vvv must require user model before passport vvv
 require("./models/User"); //user database model
+require("./models/Survey"); //Survey database model
 require("./services/passport"); //auth services definition
 
 //connect to remote database through mlab
@@ -35,6 +36,7 @@ app.use(passport.session());
 //api routes
 const authRoutes = require("./routes/authRoutes")(app);
 const billingRounts = require("./routes/billingRoutes")(app);
+const surveyRoutes = require("./routes/surveyRoutes")(app);
 
 //only runs if in production
 if (process.env.NODE_ENV === "production") {
