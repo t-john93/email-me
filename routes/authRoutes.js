@@ -19,20 +19,6 @@ module.exports = app => {
         (req, res) => { res.redirect("/surveys"); }
     );
 
-    //facebook route
-    app.get(
-        "/auth/facebook",
-        passport.authenticate("facebook", {
-            scope: ["profile", "email"]
-        })
-    );
-    //facebook callback
-    app.get(
-        "/auth/facebook/callback",
-        passport.authenticate("facebook"),
-        (req, res) => { res.redirect("/surveys"); }
-    );
-
     //logout route
     app.get("/api/logout", (req, res) => {
         req.logout();

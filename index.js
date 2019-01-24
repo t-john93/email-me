@@ -13,6 +13,7 @@ require("./models/Survey"); //Survey database model
 require("./services/passport"); //auth services definition
 
 //connect to remote database through mlab
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
 //declare app as new express module
